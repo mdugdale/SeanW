@@ -1,0 +1,141 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<!-- https://maven.apache.org/pom.html -->
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.snowbound.re</groupId>
+	<artifactId>test</artifactId>
+	<version>1.0.0.0</version>
+	<packaging>jar</packaging>
+	<name>Snowbound Test</name>
+	<description>Project description here</description>
+
+	<organization>
+		<name>Snowbound Software Corporation</name>
+		<url>http://www.snowbound.com/</url>
+	</organization>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<snbd_repo>https://repo.snowbound.com</snbd_repo>
+
+		<Java.Release>11</Java.Release>
+		<maven.compiler.source>${Java.Release}</maven.compiler.source>
+		<maven.compiler.target>${Java.Release}</maven.compiler.target>
+	</properties>
+	
+	<distributionManagement>
+		<repository>
+			<id>test</id>
+			<url>${snbd_repo}/repository/test/</url>
+		</repository>
+		<snapshotRepository>
+			<id>test</id>
+			<url>${snbd_repo}/repository/test/</url>
+		</snapshotRepository>
+	</distributionManagement>
+	
+	<repositories>
+		<repository>
+			<id>internal</id>
+			<name>Archiva Managed Internal Repository</name>
+			<url>${snbd_repo}/repository/internal/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>snapshots</id>
+			<name>Archiva Managed Snapshot Repository</name>
+			<url>${snbd_repo}/repository/snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>snowbound</id>
+			<name>Snowbound Repository</name>
+			<url>${snbd_repo}/repository/snowbound/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>internal</id>
+			<name>Archiva Managed Internal Repository</name>
+			<url>${snbd_repo}/repository/internal/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>snapshots</id>
+			<name>Archiva Managed Snapshot Repository</name>
+			<url>${snbd_repo}/repository/snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>snowbound</id>
+			<name>Snowbound Repository</name>
+			<url>${snbd_repo}/repository/snowbound/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<compilerArgs>
+						<arg>-Xlint:all,-options,-path</arg>
+					</compilerArgs>
+					<verbose>true</verbose>
+					<fork>true</fork>
+					<meminitial>256m</meminitial>
+					<maxmem>2048m</maxmem>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.2.0</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<mainClass>com.snowbound.re.Main</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
